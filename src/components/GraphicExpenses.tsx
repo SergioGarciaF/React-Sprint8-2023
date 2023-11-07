@@ -1,9 +1,9 @@
 
 
-const graphicExpenses = () => {
+const GraphicExpenses = () => {
   return (
-    <div>graphicExpenses</div>
+    <div>Graphic Expenses</div>
   )
 }
 
-export default graphicExpenses
+export default GraphicExpenses
