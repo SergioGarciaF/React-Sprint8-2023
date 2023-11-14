@@ -2,7 +2,7 @@
 
 const CurrentExpenses = () => {
   return (
-    <div>Current Expenses</div>
+    <div>CurrentExpenses</div>
   )
 }
 

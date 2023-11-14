@@ -1,19 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const fetchTotalExpenses = createAsyncThunk(
+  'expenses/fetchTotal',
+  async () => {
+    const response = await fetch("http://localhost:3000/expenses/1");
+    const data = await response.json();
+    const suma = Object.values(data.week).reduce((a: number, b: number) => a + b, 0);
+    return suma;
+  }
+);
 
-const initialState = {
-    totalExpenses : null
+interface TotalExpensesState {
+  totalExpenses: number | null;
 }
 
-const totalExpensesSlice = createSlice({
-    name: 'expenses',
-    initialState,
-    reducers: {
-        addTotal: (state, action) => {
-            state.totalExpenses = action.payload;
-        }
-    }
-})
 
-export const {addTotal} = totalExpensesSlice.actions
-export default totalExpensesSlice.reducer
+const initialState: TotalExpensesState = {
+  totalExpenses: null
+};
+
+const totalExpensesSlice = createSlice({
+  name: 'expenses',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchTotalExpenses.fulfilled, (state, action) => {
+      if (state) {
+        state.totalExpenses = action.payload;
+      }
+    });
+  }
+});
+
+export default totalExpensesSlice.reducer;
