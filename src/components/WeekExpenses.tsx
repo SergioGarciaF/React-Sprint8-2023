@@ -25,8 +25,8 @@ const WeekExpenses: React.FC = () => {
               <h3 className="card-title mb-2">{totalExpenses} €</h3>
             </div>
             <div className="flex gap-4">
-              <img src={arrowLeft} width={24} alt="" />
-              <img src={arrowRight} width={24} alt="" />
+              <img src={arrowLeft} width={24} alt="arrow-left" />
+              <img src={arrowRight} width={24} alt="arrow-right" />
             </div>
           </div>
         </div>

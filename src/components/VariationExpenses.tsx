@@ -1,9 +1,19 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchData } from "../store/Slices/variationExpensesSlice";
+import { AppDispatch, RootState } from '../store/store';
 
+const VariationExpenses: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const variation = useSelector((state: RootState) => state.variationExpenses.variationExpenses);
 
-const variationExpenses = () => {
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
-    <div>Variation Expenses</div>
-  )
-}
+    <div>{variation}%</div>
+  );
+};
 
-export default variationExpenses
+export default VariationExpenses;
