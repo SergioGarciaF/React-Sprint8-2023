@@ -1,9 +1,10 @@
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { AppDispatch, RootState } from '../store/store';
 import { fetchGraphic } from '../store/Slices/graphicExpensesSlice';
 import VariationExpenses from './VariationExpenses';
 import { Bar } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -60,6 +61,8 @@ const GraphicExpenses: React.FC = () => {
     },
   };
 
+  const { t } = useTranslation(["traductor"]);
+
   return (
     <div>
       <div className="card w-96 bg-primary mx-auto shadow-xl">
@@ -71,14 +74,14 @@ const GraphicExpenses: React.FC = () => {
         </div>
         <div className='flex justify-between'>
           <div className='mt-2 ms-4'>
-            <p className='text-xs'>Despeses avui</p>
+            <p className='text-xs'>{t("Gastos-hoy")}</p>
             <div className='mb-2 text-xl'>
               {graphicExpenses[1]} €
             </div>
           </div>
           <div className='mt-2 me-4 align-baseline'>
             <VariationExpenses />
-            <p className='text-xs'>Respecte a ahir</p>
+            <p className='text-xs'>{t("Gastos-ayer")}</p>
           </div>
         </div>
       </div>
