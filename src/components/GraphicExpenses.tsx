@@ -1,8 +1,14 @@
+
+//React Hooks
 import React, { useEffect } from 'react';
+
+//Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
 import { fetchGraphic } from '../store/Slices/graphicExpensesSlice';
 import VariationExpenses from './VariationExpenses';
+
+//Charts.js
 import { Bar } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 import {
@@ -14,7 +20,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,7 +29,9 @@ ChartJS.register(
   Legend
 );
 
+
 const GraphicExpenses: React.FC = () => {
+
   const dispatch: AppDispatch = useDispatch();
   const graphicExpenses = useSelector((state: RootState) => state.graphicExpenses.graphicExpenses);
 
@@ -32,8 +39,8 @@ const GraphicExpenses: React.FC = () => {
     dispatch(fetchGraphic());
   }, [dispatch]);
 
+  //Graphics
   const days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
   const data = {
     labels: days,
     datasets: [
@@ -43,7 +50,6 @@ const GraphicExpenses: React.FC = () => {
       },
     ],
   };
-
   const options = {
     plugins: {
       legend: {
@@ -61,6 +67,7 @@ const GraphicExpenses: React.FC = () => {
     },
   };
 
+  //Translations
   const { t } = useTranslation(["traductor"]);
 
   return (

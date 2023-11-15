@@ -1,14 +1,16 @@
+//React Hooks
 import React, { useEffect } from "react";
+//Redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTotalExpenses } from "../store/Slices/totalExpensesSlice";
 import { AppDispatch, RootState } from '../store/store';
-
+//Assets
 import arrowLeft from '../assets/PhArrowLeftLight.svg';
 import arrowRight from '../assets/PhArrowRightLight.svg';
 import es from '../assets/ES.svg';
 import cat from '../assets/Cat.svg';
 import uk from '../assets/Uk.svg';
-
+//Translations
 import { useTranslation } from 'react-i18next';
 
 const WeekExpenses: React.FC = () => {

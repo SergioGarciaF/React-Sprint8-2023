@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    graphicExpenses: []
+    graphicExpenses: [] as any[]
 }
 
 export const fetchGraphic = createAsyncThunk(
