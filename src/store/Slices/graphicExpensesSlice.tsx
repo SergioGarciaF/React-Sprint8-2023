@@ -1,31 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    monday: null,
-    tuesday: null,
-    wednesday: null,
-    thursday: null,
-    friday: null,
-    saturday: null,
-    sunday: null
+    graphicExpenses: []
 }
 
- const graphicExpensesSlice = createSlice({
+export const fetchGraphic = createAsyncThunk(
+    'expenses/fetchGraphic',
+    async () => {
+        try {
+            const response = await fetch("http://localhost:3000/expenses/1");
+            const data = await response.json();
+            const days = Object.values(data.week);
+            return days;
+        } catch (error) {
+            console.error("Error fetching graphic:", error);
+            throw error;
+        }
+    }
+);
+
+const graphicExpensesSlice = createSlice({
     name: 'graphics',
     initialState,
     reducers: {
-        addGraphics: (state, action) => {
-            const {monday, tuesday, wednesday, thursday, friday, saturday, sunday} = action.payload;
-            state.monday = monday;
-            state.tuesday = tuesday;
-            state.wednesday = wednesday;
-            state.thursday = thursday;
-            state.friday = friday;
-            state.saturday = saturday;
-            state.sunday = sunday;
-        }
-    }
- })
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchGraphic.fulfilled, (state, action) => {
+            state.graphicExpenses = action.payload
+        });
+      }
+    });
 
- export const {addGraphics} = graphicExpensesSlice.actions
- export default graphicExpensesSlice.reducer
+
+export default graphicExpensesSlice.reducer

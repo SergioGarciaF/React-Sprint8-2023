@@ -5,7 +5,7 @@ export const fetchTotalExpenses = createAsyncThunk(
   async () => {
     const response = await fetch("http://localhost:3000/expenses/1");
     const data = await response.json();
-    const suma = Object.values(data.week).reduce((a: number, b: number) => a + b, 0);
+    const suma = Object.values(data.week).reduce((a: number, b: number) => (a as number)+ (b as number), 0);
     return suma;
   }
 );
@@ -25,9 +25,7 @@ const totalExpensesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTotalExpenses.fulfilled, (state, action) => {
-      if (state) {
         state.totalExpenses = action.payload;
-      }
     });
   }
 });
